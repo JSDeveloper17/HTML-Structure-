@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Color Palette Preview – Light & Dark Modes</title>
+  <style>
+    :root {
+      --radius: 10px;
+      --transition: all 0.3s ease;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 2rem;
+      transition: var(--transition);
+      background: var(--background);
+      color: var(--text-primary);
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    button {
+      background: var(--surface);
+      color: var(--text-primary);
+      border: 1px solid var(--secondary);
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: var(--transition);
+    }
+
+    button:hover {
+      background: var(--secondary);
+      color: #fff;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--surface);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    th, td {
+      padding: 1rem;
+      text-align: left;
+    }
+
+    th {
+      background: var(--accent);
+      color: var(--text-primary);
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+    }
+
+    tr:nth-child(even) {
+      background: rgba(0,0,0,0.03);
+    }
+
+    td.preview {
+      width: 60px;
+    }
+
+    .swatch {
+      width: 40px;
+      height: 24px;
+      border-radius: 6px;
+      border: 1px solid rgba(0,0,0,0.1);
+    }
+
+    footer {
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    /* Light theme */
+    :root {
+      --background: #F1F5F9;
+      --surface: #FFFFFF;
+      --text-primary: #0F172A;
+      --text-secondary: #475569;
+      --primary: #1D4ED8;
+      --secondary: #3B82F6;
+      --accent: #E2E8F0;
+      --success: #10B981;
+      --warning: #EA580C;
+      --error: #EF4444;
+    }
+
+    /* Dark theme */
+    [data-theme="dark"] {
+      --background: #020617;
+      --surface: #111827;
+      --text-primary: #F9FAFB;
+      --text-secondary: #D1D5DB;
+      --primary: #3B82F6;
+      --secondary: #60A5FA;
+      --accent: #9CA3AF;
+      --success: #34D399;
+      --warning: #F59E0B;
+      --error: #F87171;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🎨 Color Palette Preview</h1>
+    <button id="toggleTheme">🌙 Dark Mode</button>
+  </header>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Role</th>
+        <th>Hex Code</th>
+        <th>Preview</th>
+        <th>Usage Example</th>
+        <th>Contrast Notes</th>
+      </tr>
+    </thead>
+    <tbody id="paletteTable"></tbody>
+  </table>
+
+  <footer>Toggle between Light and Dark mode to preview your full palette 🌗</footer>
+
+  <script>
+    const palettes = {
+      light: [
+        ["Background", "#F1F5F9", "Ambient space", "N/A (base)"],
+        ["Surface", "#FFFFFF", "Clean interfaces, lists", "High w/ text"],
+        ["Text Primary", "#0F172A", "Bold titles, nav", "15.1:1 on bg"],
+        ["Text Secondary", "#475569", "Details, timestamps", "6.9:1 on bg"],
+        ["Primary", "#1D4ED8", "Premium CTAs, links", "8.2:1 on surface"],
+        ["Secondary", "#3B82F6", "Secondary actions", "5.6:1 on surface"],
+        ["Accent", "#E2E8F0", "Silver icons, subtle borders", "1.2:1 (use sparingly)"],
+        ["Success", "#10B981", "Validation, growth", "6.5:1 on surface"],
+        ["Warning", "#EA580C", "Urgent notices", "8.7:1 on surface"],
+        ["Error", "#EF4444", "Failure indicators", "7.6:1 on surface"]
+      ],
+      dark: [
+        ["Background", "#020617", "Deep void backdrop", "N/A (base)"],
+        ["Surface", "#111827", "Structured surfaces", "High w/ text"],
+        ["Text Primary", "#F9FAFB", "Core content", "15.0:1 on bg"],
+        ["Text Secondary", "#D1D5DB", "Supporting text", "7.0:1 on bg"],
+        ["Primary", "#3B82F6", "Glowing primaries", "6.1:1 on surface"],
+        ["Secondary", "#60A5FA", "Hover enhancements", "5.0:1 on surface"],
+        ["Accent", "#9CA3AF", "Metallic accents", "2.1:1 (pair w/ dark)"],
+        ["Success", "#34D399", "Success glows", "6.3:1 on surface"],
+        ["Warning", "#F59E0B", "Warning flares", "8.4:1 on surface"],
+        ["Error", "#F87171", "Red alerts", "7.4:1 on surface"]
+      ]
+    };
+
+    const table = document.getElementById("paletteTable");
+    const toggleBtn = document.getElementById("toggleTheme");
+    let currentTheme = "light";
+
+    function renderPalette(mode) {
+      table.innerHTML = "";
+      palettes[mode].forEach(([role, hex, usage, contrast]) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${role}</td>
+          <td>${hex}</td>
+          <td class="preview"><div class="swatch" style="background:${hex}"></div></td>
+          <td>${usage}</td>
+          <td>${contrast}</td>
+        `;
+        table.appendChild(tr);
+      });
+    }
+
+    toggleBtn.addEventListener("click", () => {
+      currentTheme = currentTheme === "light" ? "dark" : "light";
+      document.body.setAttribute("data-theme", currentTheme);
+      toggleBtn.textContent = currentTheme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode";
+      renderPalette(currentTheme);
+    });
+
+    renderPalette("light");
+  </script>
+</body>
+</html>

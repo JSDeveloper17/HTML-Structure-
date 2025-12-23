@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Light & Dark Theme Color Palette</title>
+<style>
+  body {
+    font-family: system-ui, sans-serif;
+    display: flex;
+    gap: 2rem;
+    padding: 2rem;
+    background: #e5e7eb;
+    color: #111827;
+  }
+  .theme {
+    border-radius: 12px;
+    overflow: hidden;
+    flex: 1;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .theme-header {
+    text-align: center;
+    font-weight: 600;
+    padding: 1rem;
+    background: #f3f4f6;
+    border-bottom: 1px solid #d1d5db;
+  }
+  .swatch {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    font-size: 0.95rem;
+  }
+  .color-box {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    border: 1px solid rgba(0,0,0,0.1);
+  }
+
+  /* Light theme colors */
+  .light {
+    background: #FFFFFF;
+    color: #1F2937;
+  }
+
+  /* Dark theme colors */
+  .dark {
+    background: #0F172A;
+    color: #F8FAFC;
+  }
+
+  /* Utility for text contrast */
+  .swatch span {
+    flex: 1;
+    margin-left: 1rem;
+  }
+</style>
+</head>
+<body>
+
+  <!-- Light Theme -->
+  <div class="theme light">
+    <div class="theme-header">🌞 Light Theme</div>
+    <div class="swatch"><div class="color-box" style="background:#3B82F6"></div><span>Primary – #3B82F6</span></div>
+    <div class="swatch"><div class="color-box" style="background:#10B981"></div><span>Secondary – #10B981</span></div>
+    <div class="swatch"><div class="color-box" style="background:#FFFFFF; border:1px solid #e5e7eb"></div><span>Background – #FFFFFF</span></div>
+    <div class="swatch"><div class="color-box" style="background:#1F2937"></div><span>Text – #1F2937</span></div>
+    <div class="swatch"><div class="color-box" style="background:#F59E0B"></div><span>Accent – #F59E0B</span></div>
+    <div class="swatch"><div class="color-box" style="background:#F3F4F6"></div><span>Neutral – #F3F4F6</span></div>
+  </div>
+
+  <!-- Dark Theme -->
+  <div class="theme dark">
+    <div class="theme-header">🌚 Dark Theme</div>
+    <div class="swatch"><div class="color-box" style="background:#60A5FA"></div><span>Primary – #60A5FA</span></div>
+    <div class="swatch"><div class="color-box" style="background:#34D399"></div><span>Secondary – #34D399</span></div>
+    <div class="swatch"><div class="color-box" style="background:#0F172A"></div><span>Background – #0F172A</span></div>
+    <div class="swatch"><div class="color-box" style="background:#F8FAFC"></div><span>Text – #F8FAFC</span></div>
+    <div class="swatch"><div class="color-box" style="background:#FBBF24"></div><span>Accent – #FBBF24</span></div>
+    <div class="swatch"><div class="color-box" style="background:#1E293B"></div><span>Neutral – #1E293B</span></div>
+  </div>
+
+</body>
+</html>

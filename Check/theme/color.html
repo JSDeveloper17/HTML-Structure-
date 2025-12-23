@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Theme Palette & UI Preview</title>
+<style>
+  :root {
+    --radius: 8px;
+    --padding: 1rem;
+  }
+
+  body {
+    font-family: system-ui, sans-serif;
+    display: flex;
+    gap: 2rem;
+    padding: 2rem;
+    background: #e5e7eb;
+    color: #111827;
+  }
+
+  .theme {
+    flex: 1;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  .theme-header {
+    text-align: center;
+    font-weight: 600;
+    padding: 1rem;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+
+  .swatches {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .swatch {
+    flex: 1 1 50%;
+    display: flex;
+    align-items: center;
+    padding: .75rem 1rem;
+  }
+
+  .color-box {
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    border: 1px solid rgba(0,0,0,0.1);
+  }
+
+  .swatch span {
+    margin-left: 1rem;
+    font-size: 0.9rem;
+  }
+
+  /* ---------- Light Theme ---------- */
+  .light {
+    background: #FFFFFF;
+    color: #1F2937;
+  }
+  .light .theme-header { background: #F3F4F6; }
+  .light .btn-primary { background: #3B82F6; color: white; }
+  .light .btn-accent { background: #F59E0B; color: white; }
+  .light .card { background: #F3F4F6; color: #1F2937; }
+  .light input {
+    background: #FFFFFF;
+    border: 1px solid #D1D5DB;
+    color: #1F2937;
+  }
+  .light .highlight { background: #F59E0B33; padding: .25rem .5rem; border-radius: 4px; }
+
+  /* ---------- Dark Theme ---------- */
+  .dark {
+    background: #0F172A;
+    color: #F8FAFC;
+  }
+  .dark .theme-header { background: #1E293B; }
+  .dark .btn-primary { background: #60A5FA; color: #0F172A; }
+  .dark .btn-accent { background: #FBBF24; color: #0F172A; }
+  .dark .card { background: #1E293B; color: #F8FAFC; }
+  .dark input {
+    background: #0F172A;
+    border: 1px solid #334155;
+    color: #F8FAFC;
+  }
+  .dark .highlight { background: #FBBF2433; padding: .25rem .5rem; border-radius: 4px; }
+
+  /* ---------- Shared UI Styles ---------- */
+  .ui-preview {
+    padding: var(--padding);
+    border-top: 1px solid rgba(0,0,0,0.1);
+  }
+
+  .buttons {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .btn-primary, .btn-accent {
+    border: none;
+    border-radius: var(--radius);
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .card {
+    border-radius: var(--radius);
+    padding: var(--padding);
+    margin-top: 1rem;
+  }
+
+  input {
+    width: 100%;
+    border-radius: var(--radius);
+    padding: 0.5rem;
+    margin-top: .5rem;
+  }
+
+  .sample-text {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-top: .5rem;
+  }
+
+</style>
+</head>
+<body>
+
+  <!-- Light Theme -->
+  <div class="theme light">
+    <div class="theme-header">🌞 Light Theme</div>
+    <div class="swatches">
+      <div class="swatch"><div class="color-box" style="background:#3B82F6"></div><span>Primary – #3B82F6</span></div>
+      <div class="swatch"><div class="color-box" style="background:#10B981"></div><span>Secondary – #10B981</span></div>
+      <div class="swatch"><div class="color-box" style="background:#FFFFFF; border:1px solid #e5e7eb"></div><span>Background – #FFFFFF</span></div>
+      <div class="swatch"><div class="color-box" style="background:#1F2937"></div><span>Text – #1F2937</span></div>
+      <div class="swatch"><div class="color-box" style="background:#F59E0B"></div><span>Accent – #F59E0B</span></div>
+      <div class="swatch"><div class="color-box" style="background:#F3F4F6"></div><span>Neutral – #F3F4F6</span></div>
+    </div>
+
+    <div class="ui-preview">
+      <h3>UI Preview</h3>
+      <div class="buttons">
+        <button class="btn-primary">Primary Button</button>
+        <button class="btn-accent">Accent Button</button>
+      </div>
+      <div class="card">
+        <h4>Card Title</h4>
+        <p class="sample-text">
+          This is a sample card using the <span class="highlight">neutral background</span> color.
+          Notice how the text contrasts with the background.
+        </p>
+        <label>Email:
+          <input type="email" placeholder="Enter your email" />
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dark Theme -->
+  <div class="theme dark">
+    <div class="theme-header">🌚 Dark Theme</div>
+    <div class="swatches">
+      <div class="swatch"><div class="color-box" style="background:#60A5FA"></div><span>Primary – #60A5FA</span></div>
+      <div class="swatch"><div class="color-box" style="background:#34D399"></div><span>Secondary – #34D399</span></div>
+      <div class="swatch"><div class="color-box" style="background:#0F172A"></div><span>Background – #0F172A</span></div>
+      <div class="swatch"><div class="color-box" style="background:#F8FAFC"></div><span>Text – #F8FAFC</span></div>
+      <div class="swatch"><div class="color-box" style="background:#FBBF24"></div><span>Accent – #FBBF24</span></div>
+      <div class="swatch"><div class="color-box" style="background:#1E293B"></div><span>Neutral – #1E293B</span></div>
+    </div>
+
+    <div class="ui-preview">
+      <h3>UI Preview</h3>
+      <div class="buttons">
+        <button class="btn-primary">Primary Button</button>
+        <button class="btn-accent">Accent Button</button>
+      </div>
+      <div class="card">
+        <h4>Card Title</h4>
+        <p class="sample-text">
+          This is a sample card using the <span class="highlight">neutral background</span> color.
+          The colors maintain strong contrast in dark mode.
+        </p>
+        <label>Email:
+          <input type="email" placeholder="Enter your email" />
+        </label>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modern Color Palette Analyzer</title>
+<style>
+  :root {
+    --radius: 8px;
+    --transition: 0.3s ease;
+  }
+
+  body {
+    font-family: system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2rem;
+    transition: background var(--transition), color var(--transition);
+  }
+
+  .container {
+    width: 100%;
+    max-width: 900px;
+    background: var(--surface);
+    border-radius: var(--radius);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    padding: 2rem;
+    transition: background var(--transition);
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  select, button.toggle {
+    border-radius: var(--radius);
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--neutral);
+    background: var(--surface-light);
+    color: var(--text);
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  button.toggle {
+    background: var(--primary);
+    color: var(--on-primary);
+    border: none;
+  }
+
+  .palette-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .color-swatch {
+    flex: 1 1 150px;
+    border-radius: var(--radius);
+    padding: 1rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #fff;
+  }
+
+  .ui-preview h2 {
+    margin-bottom: 1rem;
+  }
+
+  .buttons {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .btn {
+    border: none;
+    border-radius: var(--radius);
+    padding: 0.6rem 1.2rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  .btn.primary {
+    background: var(--primary);
+    color: var(--on-primary);
+  }
+
+  .btn.accent {
+    background: var(--accent);
+    color: var(--on-primary);
+  }
+
+  .card {
+    background: var(--surface-light);
+    border-radius: var(--radius);
+    padding: 1rem;
+    margin-top: 1rem;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--neutral);
+    background: var(--bg);
+    color: var(--text);
+  }
+
+  .highlight {
+    background: var(--accent-transparent);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+  }
+
+  /* Default variables */
+  :root {
+    --primary: #6366F1;
+    --accent: #06B6D4;
+    --bg: #F9FAFB;
+    --surface: #FFFFFF;
+    --surface-light: #F3F4F6;
+    --text: #1E293B;
+    --neutral: #E5E7EB;
+    --on-primary: #FFFFFF;
+    --accent-transparent: #06b6d433;
+  }
+</style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>🎨 Modern Palette Analyzer</h1>
+      <div>
+        <select id="palette-select">
+          <option value="aurora">Aurora Mist</option>
+          <option value="verdant">Verdant Glow</option>
+          <option value="obsidian">Obsidian Glow</option>
+        </select>
+        <button class="toggle" id="mode-toggle">🌞 Light</button>
+      </div>
+    </header>
+
+    <div class="palette-info" id="swatches"></div>
+
+    <div class="ui-preview">
+      <h2>UI Preview</h2>
+      <div class="buttons">
+        <button class="btn primary">Primary Button</button>
+        <button class="btn accent">Accent Button</button>
+      </div>
+      <div class="card">
+        <h3>Sample Card</h3>
+        <p>This card uses the <span class="highlight">neutral and accent</span> tones from the palette.</p>
+        <label for="email">Email:</label>
+        <input type="email" id="email" placeholder="Enter your email">
+      </div>
+    </div>
+  </div>
+
+<script>
+const root = document.documentElement;
+const modeToggle = document.getElementById('mode-toggle');
+const paletteSelect = document.getElementById('palette-select');
+const swatches = document.getElementById('swatches');
+
+let darkMode = false;
+
+// Define 3 modern palettes
+const palettes = {
+  aurora: {
+    name: "Aurora Mist",
+    light: {
+      primary: "#6366F1",
+      accent: "#06B6D4",
+      bg: "#F9FAFB",
+      surface: "#FFFFFF",
+      surfaceLight: "#F3F4F6",
+      text: "#1E293B",
+      neutral: "#E5E7EB",
+      onPrimary: "#FFFFFF",
+      accentTransparent: "#06b6d433"
+    },
+    dark: {
+      primary: "#818CF8",
+      accent: "#22D3EE",
+      bg: "#111827",
+      surface: "#1E293B",
+      surfaceLight: "#334155",
+      text: "#F8FAFC",
+      neutral: "#475569",
+      onPrimary: "#0F172A",
+      accentTransparent: "#22d3ee33"
+    }
+  },
+  verdant: {
+    name: "Verdant Glow",
+    light: {
+      primary: "#16A34A",
+      accent: "#F59E0B",
+      bg: "#FAFAF9",
+      surface: "#FFFFFF",
+      surfaceLight: "#F5F5F4",
+      text: "#1C1917",
+      neutral: "#E7E5E4",
+      onPrimary: "#FFFFFF",
+      accentTransparent: "#f59e0b33"
+    },
+    dark: {
+      primary: "#4ADE80",
+      accent: "#FBBF24",
+      bg: "#0F172A",
+      surface: "#1E293B",
+      surfaceLight: "#334155",
+      text: "#F8FAFC",
+      neutral: "#475569",
+      onPrimary: "#0F172A",
+      accentTransparent: "#fbbf2433"
+    }
+  },
+  obsidian: {
+    name: "Obsidian Glow",
+    light: {
+      primary: "#0EA5E9",
+      accent: "#A855F7",
+      bg: "#F8FAFC",
+      surface: "#FFFFFF",
+      surfaceLight: "#F3F4F6",
+      text: "#111827",
+      neutral: "#E5E7EB",
+      onPrimary: "#FFFFFF",
+      accentTransparent: "#a855f733"
+    },
+    dark: {
+      primary: "#38BDF8",
+      accent: "#C084FC",
+      bg: "#0B1120",
+      surface: "#1E293B",
+      surfaceLight: "#334155",
+      text: "#E2E8F0",
+      neutral: "#475569",
+      onPrimary: "#0F172A",
+      accentTransparent: "#c084fc33"
+    }
+  }
+};
+
+// Apply selected palette + mode
+function applyPalette() {
+  const palette = palettes[paletteSelect.value][darkMode ? 'dark' : 'light'];
+  for (const [key, val] of Object.entries(palette)) {
+    root.style.setProperty(`--${key}`, val);
+  }
+  updateSwatches(palette);
+  modeToggle.textContent = darkMode ? "🌚 Dark" : "🌞 Light";
+}
+
+// Display swatches for current palette
+function updateSwatches(palette) {
+  swatches.innerHTML = Object.entries(palette)
+    .filter(([k]) => !k.includes('Transparent') && !k.includes('onPrimary'))
+    .map(([key, value]) => `
+      <div class="color-swatch" style="background:${value}">
+        <div>${key}</div>
+        <div>${value}</div>
+      </div>
+    `).join('');
+}
+
+// Event listeners
+modeToggle.addEventListener('click', () => {
+  darkMode = !darkMode;
+  applyPalette();
+});
+
+paletteSelect.addEventListener('change', applyPalette);
+
+// Init
+applyPalette();
+</script>
+
+</body>
+</html>

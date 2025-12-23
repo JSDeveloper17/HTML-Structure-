@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Color Palette Preview – Light & Dark</title>
+<style>
+  :root {
+    --transition: all 0.3s ease;
+
+    /* Light mode colors */
+    --background: #FEFEFE;
+    --surface: #FFFFFF;
+    --text-primary: #111827;
+    --text-secondary: #6B7280;
+    --primary: #0F766E;
+    --secondary: #14B8A6;
+    --accent: #FCA5A5;
+    --success: #059669;
+    --warning: #D97706;
+    --error: #DC2626;
+  }
+
+  [data-theme="dark"] {
+    /* Dark mode colors */
+    --background: #0A0A0F;
+    --surface: #1F2937;
+    --text-primary: #F3F4F6;
+    --text-secondary: #D1D5DB;
+    --primary: #14B8A6;
+    --secondary: #2DD4BF;
+    --accent: #FDBA74;
+    --success: #34D399;
+    --warning: #FCD34D;
+    --error: #F87171;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--text-primary);
+    font-family: system-ui, sans-serif;
+    margin: 0;
+    padding: 2rem;
+    transition: var(--transition);
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    margin: 0;
+  }
+
+  button {
+    background: var(--surface);
+    color: var(--text-primary);
+    border: 1px solid var(--secondary);
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  button:hover {
+    background: var(--secondary);
+    color: #fff;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--surface);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: var(--transition);
+  }
+
+  th, td {
+    padding: 0.8rem 1rem;
+    text-align: left;
+  }
+
+  th {
+    background: var(--accent);
+    color: var(--text-primary);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  tr:nth-child(even) {
+    background: rgba(0,0,0,0.03);
+  }
+
+  td.preview {
+    width: 70px;
+  }
+
+  .swatch {
+    width: 40px;
+    height: 24px;
+    border-radius: 6px;
+    border: 1px solid rgba(0,0,0,0.1);
+  }
+
+  footer {
+    margin-top: 2rem;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>🎨 Color Palette Preview</h1>
+  <button id="themeToggle">🌙 Dark Mode</button>
+</header>
+
+<table>
+  <thead>
+    <tr>
+      <th>Role</th>
+      <th>Hex Code</th>
+      <th>Preview</th>
+      <th>Usage Example</th>
+      <th>Contrast Notes</th>
+    </tr>
+  </thead>
+  <tbody id="paletteTable"></tbody>
+</table>
+
+<footer>Toggle between Light and Dark mode to explore the full palette 🌗</footer>
+
+<script>
+  const palettes = {
+    light: [
+      ["Background", "#FEFEFE", "Ethereal base", "N/A (base)"],
+      ["Surface", "#FFFFFF", "Layered elements", "High w/ text"],
+      ["Text Primary", "#111827", "Dominant text", "15.3:1 on bg"],
+      ["Text Secondary", "#6B7280", "Subtle descriptors", "6.6:1 on bg"],
+      ["Primary", "#0F766E", "Elegant buttons", "8.9:1 on surface"],
+      ["Secondary", "#14B8A6", "Interactive teals", "5.8:1 on surface"],
+      ["Accent", "#FCA5A5", "Rose gold highlights", "4.6:1 on surface"],
+      ["Success", "#059669", "Harmony signals", "7.2:1 on surface"],
+      ["Warning", "#D97706", "Soft cautions", "8.3:1 on surface"],
+      ["Error", "#DC2626", "Rose-tinged errors", "8.0:1 on surface"]
+    ],
+    dark: [
+      ["Background", "#0A0A0F", "Mystical depths", "N/A (base)"],
+      ["Surface", "#1F2937", "Veiled panels", "High w/ text"],
+      ["Text Primary", "#F3F4F6", "Luminous text", "14.7:1 on bg"],
+      ["Text Secondary", "#D1D5DB", "Faded veils", "6.8:1 on bg"],
+      ["Primary", "#14B8A6", "Veiled primaries", "6.2:1 on surface"],
+      ["Secondary", "#2DD4BF", "Glowing seconds", "5.2:1 on surface"],
+      ["Accent", "#FDBA74", "Auroral rose sparks", "4.5:1 on surface"],
+      ["Success", "#34D399", "Teal successes", "6.6:1 on surface"],
+      ["Warning", "#FCD34D", "Golden warnings", "7.9:1 on surface"],
+      ["Error", "#F87171", "Warm errors", "7.2:1 on surface"]
+    ]
+  };
+
+  const tbody = document.getElementById("paletteTable");
+  const toggleBtn = document.getElementById("themeToggle");
+  let currentTheme = "light";
+
+  function renderPalette(theme) {
+    tbody.innerHTML = "";
+    palettes[theme].forEach(([role, hex, usage, contrast]) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${role}</td>
+        <td>${hex}</td>
+        <td class="preview"><div class="swatch" style="background:${hex}"></div></td>
+        <td>${usage}</td>
+        <td>${contrast}</td>
+      `;
+      tbody.appendChild(row);
+    });
+  }
+
+  toggleBtn.addEventListener("click", () => {
+    currentTheme = currentTheme === "light" ? "dark" : "light";
+    document.body.setAttribute("data-theme", currentTheme);
+    toggleBtn.textContent = currentTheme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode";
+    renderPalette(currentTheme);
+  });
+
+  // Initialize
+  renderPalette("light");
+</script>
+</body>
+</html>

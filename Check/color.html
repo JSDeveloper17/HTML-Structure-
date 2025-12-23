@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>3D / Animated Color Palettes — Preview</title>
+  <style>
+    /* ---------- Reset & helpers ---------- */
+    :root{
+      --bg: #0b0f19;
+      --text: #e5e7eb;
+      --primary: #00E5FF;
+      --secondary: #7C3AED;
+      --accent: #00FFB3;
+      --card-bg: rgba(255,255,255,0.04);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:linear-gradient(180deg,var(--bg), #000 80%);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:28px;
+    }
+
+    a{color:inherit}
+
+    /* ---------- Layout ---------- */
+    .container{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:360px 1fr;gap:28px;align-items:start}
+
+    /* ---------- Sidebar: palettes ---------- */
+    .sidebar{position:relative}
+    h1{font-size:20px;margin:0 0 12px 0}
+    p.lead{margin:0 0 18px 0;opacity:0.85;font-size:13px}
+
+    .palettes{display:flex;flex-direction:column;gap:12px}
+    .palette-btn{
+      display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;background:linear-gradient(135deg, rgba(255,255,255,0.02), rgba(0,0,0,0.03));
+    }
+    .palette-btn:hover{transform:translateY(-4px);box-shadow:0 8px 28px rgba(2,6,23,0.6)}
+
+    .swatches{display:flex;gap:6px}
+    .sw{width:40px;height:40px;border-radius:8px;box-shadow:inset 0 -8px 18px rgba(0,0,0,0.35)}
+
+    .meta{flex:1}
+    .meta b{display:block}
+    .meta small{display:block;color:rgba(255,255,255,0.65);font-size:12px;margin-top:4px}
+
+    .actions{display:flex;gap:8px;margin-top:14px}
+    .btn{padding:10px 12px;border-radius:10px;background:linear-gradient(90deg,var(--primary),var(--secondary));color:#061018;border:none;cursor:pointer;font-weight:600;box-shadow:0 8px 30px rgba(2,6,23,0.6)}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text);box-shadow:none}
+
+    /* ---------- Preview area ---------- */
+    .preview{display:flex;flex-direction:column;gap:20px}
+
+    /* Hero */
+    .hero{
+      border-radius:16px;padding:36px;position:relative;overflow:hidden;min-height:260px;display:flex;align-items:center;gap:24px;
+      background:linear-gradient(120deg,var(--primary),var(--secondary));
+      box-shadow:0 24px 80px rgba(2,6,23,0.6), inset 0 -30px 80px rgba(255,255,255,0.02);
+      transform:translateZ(0);
+    }
+
+    .hero .glass-card{
+      backdrop-filter: blur(8px) saturate(1.2);
+      background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      border-radius:14px;padding:18px;width:420px;box-shadow:0 10px 32px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.06);
+      transform:translateZ(20px) translateY(-6px);
+    }
+    .hero h2{margin:0 0 8px 0;font-size:20px}
+    .hero p{margin:0;font-size:13px;opacity:0.95}
+
+    .hero .visual{
+      margin-left:auto;width:260px;height:160px;border-radius:18px;display:grid;place-items:center;position:relative;overflow:visible;
+    }
+
+    /* 3D orb */
+    .orb{
+      width:160px;height:160px;border-radius:50%;position:relative;filter:drop-shadow(0 24px 40px rgba(0,0,0,0.6));
+      background:conic-gradient(from 90deg at 50% 50%, rgba(255,255,255,0.06), rgba(0,0,0,0.08));
+      display:grid;place-items:center;transform-style:preserve-3d;animation:orb-rotate 8s linear infinite;
+    }
+    .orb .glow{position:absolute;inset:0;border-radius:50%;box-shadow:0 0 40px var(--accent), 0 0 120px rgba(0,0,0,0.25);mix-blend-mode:screen;pointer-events:none}
+    @keyframes orb-rotate{from{transform:rotateY(0deg) rotateX(0deg)}to{transform:rotateY(360deg) rotateX(30deg)}}
+
+    /* Cards grid */
+    .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px}
+    .card{border-radius:14px;padding:14px;background:linear-gradient(180deg,rgba(255,255,255,0.02), rgba(0,0,0,0.06));border:1px solid rgba(255,255,255,0.04);box-shadow:0 10px 30px rgba(2,6,23,0.6);transition:transform .22s ease,box-shadow .22s ease;transform-origin:center}
+    .card:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 30px 60px rgba(2,6,23,0.7)}
+
+    .chip{display:inline-block;padding:8px 10px;border-radius:999px;font-weight:700;background:linear-gradient(90deg,var(--accent),rgba(255,255,255,0.06));color:#061018}
+
+    /* Animated gradient borders */
+    .accent-line{height:6px;border-radius:999px;background:linear-gradient(90deg,var(--primary),var(--secondary));animation:shift 6s linear infinite;background-size:200% 200%}
+    @keyframes shift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+    /* Palette info footer */
+    .footer{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+    .hex{font-family:monospace;font-size:12px;padding:6px 8px;border-radius:8px;background:rgba(0,0,0,0.28);border:1px solid rgba(255,255,255,0.03)}
+
+    /* Responsive */
+    @media (max-width:980px){.container{grid-template-columns:1fr;}.hero{min-height:200px}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <h1>3D / Animated Palettes</h1>
+      <p class="lead">Click a palette to apply it across the live preview. Hover UI to see 3D depth & motion.</p>
+
+      <div class="palettes" id="palettes"></div>
+
+      <div class="actions">
+        <button class="btn" id="random">Randomize</button>
+        <button class="btn ghost" id="reset">Reset</button>
+      </div>
+    </aside>
+
+    <main class="preview">
+      <section class="hero" id="hero">
+        <div class="glass-card">
+          <h2 id="paletteName">Neon Flux</h2>
+          <p id="paletteDesc">Glowing cyber aesthetic — perfect for 3D effects and animated UIs.</p>
+
+          <div style="height:10px"></div>
+          <div class="accent-line" style="width:120px"></div>
+
+          <div style="height:12px"></div>
+          <div class="footer">
+            <span class="hex" id="primaryHex">#00E5FF</span>
+            <span class="hex" id="secondaryHex">#7C3AED</span>
+            <span class="hex" id="accentHex">#00FFB3</span>
+          </div>
+        </div>
+
+        <div class="visual">
+          <div class="orb" id="orb">
+            <div style="width:86%;height:86%;border-radius:50%;background:radial-gradient(circle at 30% 30%, rgba(255,255,255,0.18), rgba(255,255,255,0.02));transform:translateZ(40px)"></div>
+            <div class="glow"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cards" id="cards">
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <div class="chip">Primary</div>
+              <div style="height:8px"></div>
+              <div style="font-weight:700">Gradient-ready</div>
+              <div style="font-size:13px;opacity:0.8">Great for big hero areas & neon glows.</div>
+            </div>
+            <div style="align-self:center">
+              <div style="width:60px;height:60px;border-radius:12px;background:linear-gradient(135deg,var(--primary),var(--secondary));box-shadow:0 8px 30px rgba(0,0,0,0.5)"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div style="display:flex;gap:12px;align-items:center">
+            <div style="flex:1">
+              <div class="chip">Accent</div>
+              <div style="height:8px"></div>
+              <div style="font-weight:700">Buttons & Highlights</div>
+              <div style="font-size:13px;opacity:0.8">Use sparingly for CTA & interactive edges.</div>
+            </div>
+            <div style="width:64px;height:64px;border-radius:12px;background:linear-gradient(180deg,var(--accent),rgba(255,255,255,0.06));box-shadow:0 10px 26px rgba(0,0,0,0.6)"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div style="display:flex;gap:12px;align-items:center">
+            <div style="flex:1">
+              <div class="chip">Text</div>
+              <div style="height:8px"></div>
+              <div style="font-weight:700">Readable Typography</div>
+              <div style="font-size:13px;opacity:0.8">Text and UI colors chosen for contrast over dark backgrounds.</div>
+            </div>
+            <div style="width:64px;height:64px;border-radius:12px;background:linear-gradient(90deg,var(--text), rgba(255,255,255,0.08));filter:blur(0.2px);box-shadow:0 8px 30px rgba(0,0,0,0.6)"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const palettes = [
+      {
+        id:'neon-flux', name:'Neon Flux', desc:'Glowing cyber aesthetic — perfect for 3D effects and animated UIs.',
+        primary:'#00E5FF', secondary:'#7C3AED', accent:'#00FFB3', bg:'#0B0F19', text:'#E5E7EB'
+      },
+      {
+        id:'aurora-pulse', name:'Aurora Pulse', desc:'Gradient-ready, vibrant like northern lights — works beautifully with blur & motion.',
+        primary:'#4ADE80', secondary:'#60A5FA', accent:'#A78BFA', bg:'#030712', text:'#F9FAFB'
+      },
+      {
+        id:'cosmic-nova', name:'Cosmic Nova', desc:'Deep space meets tech — bold, electric, and dimensional.',
+        primary:'#6366F1', secondary:'#22D3EE', accent:'#F43F5E', bg:'#0F172A', text:'#E2E8F0'
+      },
+      {
+        id:'quantum-coral', name:'Quantum Coral', desc:'Trendy coral meets neon blue — lively, futuristic, and premium.',
+        primary:'#FF6B6B', secondary:'#3B82F6', accent:'#22D3EE', bg:'#0A0A0A', text:'#F8FAFC'
+      },
+      {
+        id:'luminous-slate', name:'Luminous Slate', desc:'Elegant glassmorphism palette — modern, sleek, and professional.',
+        primary:'#38BDF8', secondary:'#818CF8', accent:'#A855F7', bg:'#111827', text:'#F3F4F6'
+      }
+    ];
+
+    const palettesEl = document.getElementById('palettes');
+
+    function createPaletteEntry(p){
+      const btn = document.createElement('button');
+      btn.className='palette-btn';
+      btn.innerHTML = `
+        <div class="swatches">
+          <div class="sw" style="background:${p.primary}"></div>
+          <div class="sw" style="background:${p.secondary}"></div>
+          <div class="sw" style="background:${p.accent}"></div>
+        </div>
+        <div class="meta">
+          <b>${p.name}</b>
+          <small>${p.desc}</small>
+        </div>
+      `;
+      btn.addEventListener('click',()=>applyPalette(p));
+      return btn;
+    }
+
+    palettes.forEach(p=>palettesEl.appendChild(createPaletteEntry(p)));
+
+    function applyPalette(p){
+      document.documentElement.style.setProperty('--primary', p.primary);
+      document.documentElement.style.setProperty('--secondary', p.secondary);
+      document.documentElement.style.setProperty('--accent', p.accent);
+      document.documentElement.style.setProperty('--bg', p.bg);
+      document.documentElement.style.setProperty('--text', p.text);
+
+      document.getElementById('paletteName').textContent = p.name;
+      document.getElementById('paletteDesc').textContent = p.desc;
+      document.getElementById('primaryHex').textContent = p.primary;
+      document.getElementById('secondaryHex').textContent = p.secondary;
+      document.getElementById('accentHex').textContent = p.accent;
+
+      // orb glow
+      const orb = document.getElementById('orb');
+      orb.querySelector('.glow').style.boxShadow = `0 0 40px ${p.accent}, 0 0 120px ${blendColor(p.accent, p.secondary, 0.6)}`;
+
+      // hero gradient using primary/secondary
+      const hero = document.getElementById('hero');
+      hero.style.background = `linear-gradient(120deg, ${p.primary}, ${p.secondary})`;
+
+      // adjust text color for cards if needed
+      document.body.style.background = `linear-gradient(180deg, ${p.bg}, #000 80%)`;
+      document.body.style.color = p.text;
+    }
+
+    // small utility to blend two hex colors (simple lerp)
+    function blendColor(a,b,t){
+      const pa = hexToRgb(a), pb = hexToRgb(b);
+      const r = Math.round(pa.r + (pb.r-pa.r)*t);
+      const g = Math.round(pa.g + (pb.g-pa.g)*t);
+      const bl = Math.round(pa.b + (pb.b-pa.b)*t);
+      return `rgb(${r}, ${g}, ${bl})`;
+    }
+    function hexToRgb(hex){
+      const clean = hex.replace('#','');
+      const bigint = parseInt(clean,16);
+      if(clean.length===6){
+        return {r:(bigint>>16)&255, g:(bigint>>8)&255, b:bigint&255};
+      }
+      // fallback
+      return {r:0,g:0,b:0};
+    }
+
+    // Randomize pick
+    document.getElementById('random').addEventListener('click',()=>{
+      const p = palettes[Math.floor(Math.random()*palettes.length)];
+      applyPalette(p);
+    });
+    document.getElementById('reset').addEventListener('click',()=>applyPalette(palettes[0]));
+
+    // initialize
+    applyPalette(palettes[0]);
+  </script>
+</body>
+</html>

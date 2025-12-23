@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Color Palette Preview – Light & Dark Modes</title>
+  <style>
+    :root {
+      font-family: system-ui, sans-serif;
+      --radius: 10px;
+    }
+
+    body {
+      margin: 0;
+      padding: 2rem;
+      background: #f5f5f5;
+      color: #111;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-weight: 600;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .palette {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .palette header {
+      padding: 1rem;
+      font-weight: 600;
+      text-align: center;
+      font-size: 1.2rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 0.8rem 1rem;
+      text-align: left;
+    }
+
+    th {
+      background: rgba(0,0,0,0.05);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    td.preview {
+      width: 70px;
+    }
+
+    .swatch {
+      width: 45px;
+      height: 24px;
+      border-radius: 6px;
+      border: 1px solid rgba(0,0,0,0.1);
+    }
+
+    /* Light mode preview box */
+    .light-mode {
+      background: #FAFBFD;
+      color: #1E293B;
+    }
+
+    .light-mode header {
+      background: #FFFFFF;
+      border-bottom: 1px solid #E2E8F0;
+    }
+
+    /* Dark mode preview box */
+    .dark-mode {
+      background: #0F0F23;
+      color: #F8FAFC;
+    }
+
+    .dark-mode header {
+      background: #1E1B4B;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .dark-mode th {
+      background: rgba(255,255,255,0.05);
+    }
+
+    .note {
+      text-align: center;
+      color: #64748B;
+      font-size: 0.9rem;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>🎨 Color Palette Preview – Light & Dark Modes</h1>
+
+  <div class="grid">
+    <!-- Light Mode -->
+    <div class="palette light-mode">
+      <header>☀️ Light Mode</header>
+      <table>
+        <thead>
+          <tr>
+            <th>Role</th>
+            <th>Hex Code</th>
+            <th>Preview</th>
+            <th>Usage Example</th>
+            <th>Contrast Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Background</td><td>#FAFBFD</td><td class="preview"><div class="swatch" style="background:#FAFBFD"></div></td><td>Page body, expansive sections</td><td>N/A (base)</td></tr>
+          <tr><td>Surface</td><td>#FFFFFF</td><td class="preview"><div class="swatch" style="background:#FFFFFF"></div></td><td>Cards, panels, overlays</td><td>High w/ text</td></tr>
+          <tr><td>Text Primary</td><td>#1E293B</td><td class="preview"><div class="swatch" style="background:#1E293B"></div></td><td>Main headings, content</td><td>15.2:1 on bg</td></tr>
+          <tr><td>Text Secondary</td><td>#64748B</td><td class="preview"><div class="swatch" style="background:#64748B"></div></td><td>Captions, helpers</td><td>7.1:1 on bg</td></tr>
+          <tr><td>Primary</td><td>#3730A3</td><td class="preview"><div class="swatch" style="background:#3730A3"></div></td><td>Core buttons, nav</td><td>7.8:1 on surface</td></tr>
+          <tr><td>Secondary</td><td>#7C3AED</td><td class="preview"><div class="swatch" style="background:#7C3AED"></div></td><td>Hovers, borders</td><td>5.3:1 on surface</td></tr>
+          <tr><td>Accent</td><td>#A78BFA</td><td class="preview"><div class="swatch" style="background:#A78BFA"></div></td><td>Icons, premium highlights</td><td>4.9:1 on surface</td></tr>
+          <tr><td>Success</td><td>#059669</td><td class="preview"><div class="swatch" style="background:#059669"></div></td><td>Affirmations, eco-accents</td><td>6.8:1 on surface</td></tr>
+          <tr><td>Warning</td><td>#D97706</td><td class="preview"><div class="swatch" style="background:#D97706"></div></td><td>Cautions, energy bursts</td><td>8.5:1 on surface</td></tr>
+          <tr><td>Error</td><td>#DC2626</td><td class="preview"><div class="swatch" style="background:#DC2626"></div></td><td>Critical alerts</td><td>7.9:1 on surface</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Dark Mode -->
+    <div class="palette dark-mode">
+      <header>🌙 Dark Mode</header>
+      <table>
+        <thead>
+          <tr>
+            <th>Role</th>
+            <th>Hex Code</th>
+            <th>Preview</th>
+            <th>Usage Example</th>
+            <th>Contrast Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Background</td><td>#0F0F23</td><td class="preview"><div class="swatch" style="background:#0F0F23"></div></td><td>Immersive canvas</td><td>N/A (base)</td></tr>
+          <tr><td>Surface</td><td>#1E1B4B</td><td class="preview"><div class="swatch" style="background:#1E1B4B"></div></td><td>Elevated cards, drawers</td><td>High w/ text</td></tr>
+          <tr><td>Text Primary</td><td>#F8FAFC</td><td class="preview"><div class="swatch" style="background:#F8FAFC"></div></td><td>Primary text</td><td>14.8:1 on bg</td></tr>
+          <tr><td>Text Secondary</td><td>#CBD5E1</td><td class="preview"><div class="swatch" style="background:#CBD5E1"></div></td><td>Secondary info</td><td>6.7:1 on bg</td></tr>
+          <tr><td>Primary</td><td>#7C3AED</td><td class="preview"><div class="swatch" style="background:#7C3AED"></div></td><td>Action elements</td><td>5.9:1 on surface</td></tr>
+          <tr><td>Secondary</td><td>#A78BFA</td><td class="preview"><div class="swatch" style="background:#A78BFA"></div></td><td>Interactive glows</td><td>4.7:1 on surface</td></tr>
+          <tr><td>Accent</td><td>#C4B5FD</td><td class="preview"><div class="swatch" style="background:#C4B5FD"></div></td><td>Subtle nebula sparks</td><td>4.4:1 on surface</td></tr>
+          <tr><td>Success</td><td>#34D399</td><td class="preview"><div class="swatch" style="background:#34D399"></div></td><td>Positive feedback</td><td>6.4:1 on surface</td></tr>
+          <tr><td>Warning</td><td>#F59E0B</td><td class="preview"><div class="swatch" style="background:#F59E0B"></div></td><td>Alert highlights</td><td>8.2:1 on surface</td></tr>
+          <tr><td>Error</td><td>#F87171</td><td class="preview"><div class="swatch" style="background:#F87171"></div></td><td>Error states</td><td>7.5:1 on surface</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <p class="note">Compare light and dark color palettes side by side 🌗</p>
+</body>
+</html>

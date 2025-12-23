@@ -1,0 +1,629 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasva - Designer Men's Ethnic Wear</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Lato', sans-serif; line-height: 1.6; color: #333; background: #f8f8f8; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        header { background: #1a1a1a; color: #d4af37; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+        nav ul { display: flex; list-style: none; gap: 2rem; }
+        nav a { color: #d4af37; text-decoration: none; }
+        .user-actions { display: flex; gap: 1rem; }
+        .search-cart { display: flex; gap: 1rem; align-items: center; }
+        #search { padding: 0.5rem; border: 1px solid #d4af37; background: transparent; color: #d4af37; }
+        .cart { position: relative; cursor: pointer; }
+        .cart-count { position: absolute; top: -8px; right: -8px; background: #d4af37; color: #1a1a1a; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; }
+        .hero { position: relative; height: 80vh; background: url('https://via.placeholder.com/1920x800?text=Hero+Banner') center/cover; display: flex; align-items: center; justify-content: center; text-align: center; color: white; }
+        .hero-content { background: rgba(26, 26, 26, 0.7); padding: 2rem; border-radius: 10px; }
+        .promo-tags { display: flex; gap: 1rem; justify-content: center; margin-top: 1rem; flex-wrap: wrap; }
+        .promo-tag { background: #d4af37; color: #1a1a1a; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; }
+        .slider { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; }
+        .slide { position: absolute; width: 100%; height: 100%; background-size: cover; opacity: 0; transition: opacity 1s; }
+        .slide.active { opacity: 1; }
+        section { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; }
+        h2 { text-align: center; margin-bottom: 3rem; color: #1a1a1a; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .card { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.3s; }
+        .card:hover { transform: translateY(-5px); }
+        .card img { width: 100%; height: 250px; object-fit: cover; }
+        .card-content { padding: 1.5rem; }
+        .card h3 { color: #1a1a1a; margin-bottom: 0.5rem; }
+        .card p { color: #666; margin-bottom: 1rem; }
+        .btn { background: #d4af37; color: #1a1a1a; padding: 0.8rem 1.5rem; border: none; border-radius: 5px; cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.3s; }
+        .btn:hover { background: #b8942f; }
+        .add-to-cart { background: #1a1a1a; color: #d4af37; margin-top: 1rem; }
+        .filters { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .filter-btn { padding: 0.5rem 1rem; background: #f8f8f8; border: 1px solid #ddd; cursor: pointer; }
+        .filter-btn.active { background: #d4af37; color: #1a1a1a; }
+        footer { background: #1a1a1a; color: #d4af37; text-align: center; padding: 2rem; }
+        @media (max-width: 768px) { header { flex-direction: column; gap: 1rem; } nav ul { flex-direction: column; } .grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#occasions">Occasions</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#collections">Collections</a></li>
+                <li><a href="#accessories">Accessories</a></li>
+            </ul>
+        </nav>
+        <div class="user-actions">
+            <a href="/signin">Sign In / Sign Up</a>
+            <a href="/orders">Track Orders</a>
+            <a href="/stores">Find Stores</a>
+            <div class="search-cart">
+                <input type="text" id="search" placeholder="Search...">
+                <div class="cart" onclick="toggleCart()">🛒 <span class="cart-count" id="cartCount">0</span></div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="slider">
+            <div class="slide active" style="background-image: url('https://via.placeholder.com/1920x800?text=Wedding+Collection');"></div>
+            <div class="slide" style="background-image: url('https://via.placeholder.com/1920x800?text=Party+Wear');"></div>
+            <div class="slide" style="background-image: url('https://via.placeholder.com/1920x800?text=Ethnic+Essentials');"></div>
+        </div>
+        <div class="hero-content">
+            <h1>Welcome to Tasva</h1>
+            <p>Designer Men's Ethnic Wear</p>
+            <div class="promo-tags">
+                <span class="promo-tag">Free Alteration at Store</span>
+                <span class="promo-tag">Premium Quality</span>
+                <span class="promo-tag">Designer Wear Brand</span>
+                <span class="promo-tag">Secured Payment</span>
+            </div>
+            <a href="#categories" class="btn">Shop Now</a>
+        </div>
+    </section>
+
+    <section id="occasions">
+        <h2>Occasions</h2>
+        <div class="grid">
+            <div class="card">
+                <img src="https://via.placeholder.com/300x250?text=Destination+Weddings" alt="Destination Weddings">
+                <div class="card-content">
+                    <h3>Destination Weddings</h3>
+                    <p>Effortless luxury designed for scenic wedding escapes.</p>
+                    <a href="/c/destination-wedding-attire-for-men" class="btn">Explore</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://via.placeholder.com/300x250?text=Cocktail+Parties" alt="Cocktail & Dinner Parties">
+                <div class="card-content">
+                    <h3>Cocktail & Dinner Parties</h3>
+                    <p>Sophisticated silhouettes tailored for night-time celebrations.</p>
+                    <a href="/c/cocktail-dinner-party-outfits" class="btn">Explore</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://via.placeholder.com/300x250?text=Family+Rituals" alt="Family Rituals">
+                <div class="card-content">
+                    <h3>Family Rituals & Gatherings</h3>
+                    <p>Comfort-first styles with a graceful touch for intimate moments.</p>
+                    <a href="/c/mens-ethnicwear-family-gatherings-rituals" class="btn">Explore</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://via.placeholder.com/300x250?text=Year-End+Parties" alt="Year-End Parties">
+                <div class="card-content">
+                    <h3>Year-End Parties</h3>
+                    <p>Sharp, modern fits made for sparkling year-end moments.</p>
+                    <a href="/c/party-edit" class="btn">Explore</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="categories">
+        <h2>Product Categories</h2>
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterCategory('all')">All</button>
+            <button class="filter-btn" onclick="filterCategory('sherwani')">Sherwani</button>
+            <button class="filter-btn" onclick="filterCategory('kurta')">Kurta</button>
+            <button class="filter-btn" onclick="filterCategory('accessories')">Accessories</button>
+        </div>
+        <div class="grid" id="categoryGrid">
+            <div class="card" data-category="accessories">
+                <img src="https://via.placeholder.com/300x250?text=Accessories" alt="Accessories">
+                <div class="card-content">
+                    <h3>Accessories</h3>
+                    <p>Finely crafted elements that enhance your occasion wear.</p>
+                    <button class="btn add-to-cart" onclick="addToCart('Accessories', 299)">Add to Cart - ₹299</button>
+                </div>
+            </div>
+            <div class="card" data-category="sherwani">
+                <img src="https://via.placeholder.com/300x250?text=Sherwani" alt="Sherwani">
+                <div class="card-content">
+                    <h3>Sherwani</h3>
+                    <p>Timeless heritage reimagined through refined artisanal detail.</p>
+                    <button class="btn add-to-cart" onclick="addToCart('Sherwani', 4999)">Add to Cart - ₹4,999</button>
+                </div>
+            </div>
+            <div class="card" data-category="kurta">
+                <img src="https://via.placeholder.com/300x250?text=Kurta+Sets" alt="Kurta Sets">
+                <div class="card-content">
+                    <h3>Kurta Sets</h3>
+                    <p>Elegant weaves tailored for comfort, culture, and contemporary living.</p>
+                    <button class="btn add-to-cart" onclick="addToCart('Kurta Sets', 2999)">Add to Cart - ₹2,999</button>
+                </div>
+            </div>
+            <div class="card" data-category="kurta">
+                <img src="https://via.placeholder.com/300x250?text=Kurta+Bundi" alt="Kurta Bundi Sets">
+                <div class="card-content">
+                    <h3>Kurta Bundi Sets</h3>
+                    <p>Refined craftsmanship and contemporary charm for every memorable moment.</p>
+                    <button class="btn add-to-cart" onclick="addToCart('Kurta Bundi', 3999)">Add to Cart - ₹3,999</button>
+                </div>
+            </div>
+            <div class="card" data-category="sherwani">
+                <img src="https://via.placeholder.com/300x250?text=Bandhgalas" alt="Bandhgalas">
+                <div class="card-content">
+                    <h3>Bandhgalas</h3>
+                    <p>Heritage-inspired tailoring designed for modern occasions.</p>
+                    <button class="btn add-to-cart" onclick="addToCart('Bandhgalas', 3499)">Add to Cart - ₹3,499</button>
+                </div>
+            </div>
+            <div class="card" data-category="accessories">
+                <img src="https://via.placeholder.com/300x250?text=Dinner+Jackets" alt="Dinner Jackets">
+                <div class="card-content">
+                    <h3>Dinner Jackets</h3>
+                    <p>Sharp, modern cuts perfect for distinguished after-dark style.</p>
+                    <button class="btn add-to-cart" onclick="addToCart('Dinner Jackets', 5999)">Add to Cart - ₹5,999</button>
+                </div>
+            </div>
+            <div class="card" data-category="kurta">
+                <img src="https://via.placeholder.com/300x250?text=Shirts" alt="Shirts">
+                <div class="card-content">
+                    <h3>Shirts</h3>
+                    <p>Styles crafted to refine your work attire and enhance your night-time charm.</p>
+                    <button class="btn add-to-cart" onclick="addToCart('Shirts', 1999)">Add to Cart - ₹1,999</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="collections">
+        <h2>Featured Collections</h2>
+        <div class="grid">
+            <div class="card">
+                <img src="https://via.placeholder.com/300x250?text=Modern+Minimal" alt="Modern Minimal Edit">
+                <div class="card-content">
+                    <h3>Modern Minimal Edit</h3>
+                    <p>Minimal forms elevated with refined detailing.</p>
+                    <a href="/c/modern-minimal-edit" class="btn">Explore</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://via.placeholder.com/300x250?text=Signature+Craft" alt="Signature Craftsmanship">
+                <div class="card-content">
+                    <h3>Signature Craftsmanship</h3>
+                    <p>Heritage techniques perfected for contemporary elegance.</p>
+                    <a href="/c/signature-craftsmanship" class="btn">Explore</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://via.placeholder.com/300x250?text=Warmth+of+Occasions" alt="Warmth of Occasions">
+                <div class="card-content">
+                    <h3>The Warmth of Occasions Edit</h3>
+                    <p>Luxurious textures that elevate your cold-season style.</p>
+                    <a href="/c/the-warmth-of-occasions-edit" class="btn">Explore</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="accessories">
+        <h2>Accessory Highlights</h2>
+        <div class="grid">
+            <div class="card">
+                <img src="https://via.placeholder.com/300x250?text=Stoles" alt="Stoles & Dupattas">
+                <div class="card-content">
+                    <h3>Stoles & Dupattas</h3>
+                    <p>The perfect complement to your crafted celebration wear.</p>
+                    <a href="/c/stoles-and-shawls-for-men" class="btn">Explore</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://via.placeholder.com/300x250?text=Safas" alt="Safas & Turbans">
+                <div class="card-content">
+                    <h3>Safas & Turbans</h3>
+                    <p>Timeless silhouettes designed for ceremonial grandeur.</p>
+                    <a href="/c/safa-for-groom" class="btn">Explore</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://via.placeholder.com/300x250?text=Brooches" alt="Brooches & Malas">
+                <div class="card-content">
+                    <h3>Brooches & Malas</h3>
+                    <p>Statement adornments crafted for timeless sophistication.</p>
+                    <a href="/c/brooches-mala-necklaces-for-men" class="btn">Explore</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://via.placeholder.com/300x250?text=Juttis" alt="Juttis & Footwear">
+                <div class="card-content">
+                    <h3>Juttis & Footwear</h3>
+                    <p>Artisanal detailing that brings elegance to every step.</p>
+                    <a href="/c/ethnic-footwear-for-men" class="btn">Explore</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>TASVA On You: Share your latest looks for a chance to be featured</p>
+        <p>Tasva Exclusives</p>
+    </footer>
+
+    <script>
+        // Hero Slider
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+        setInterval(() => {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }, 3000);
+
+        // Smooth Scroll for Nav Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Search Functionality (Basic)
+        document.getElementById('search').addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase();
+            document.querySelectorAll('.card').forEach(card => {
+                const text = card.textContent.toLowerCase();
+                card.style.display = text.includes(query) ? 'block' : 'none';
+            });
+        });
+
+        // Cart Functionality
+        let cartCount = 0;
+        function addToCart(item, price) {
+            cartCount++;
+            document.getElementById('cartCount').textContent = cartCount;
+            alert(`${item} (₹${price}) added to cart!`);
+        }
+        function toggleCart() {
+            alert(`Cart has ${cartCount} items. (Implement modal here)`);
+        }
+
+        // Category Filters
+        function filterCategory(cat) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            document.querySelectorAll('#categoryGrid .card').forEach(card => {
+                card.style.display = (cat === 'all' || card.dataset.category === cat) ? 'block' : 'none';
+            });
+        }
+    </script>
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasva - Designer Men's Ethnic Wear</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Lato', sans-serif; line-height: 1.6; color: #333; background: #f8f8f8; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        header { background: #1a1a1a; color: #d4af37; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+        nav ul { display: flex; list-style: none; gap: 2rem; }
+        nav a { color: #d4af37; text-decoration: none; }
+        .user-actions { display: flex; gap: 1rem; }
+        .search-cart { display: flex; gap: 1rem; align-items: center; }
+        #search { padding: 0.5rem; border: 1px solid #d4af37; background: transparent; color: #d4af37; }
+        .cart { position: relative; cursor: pointer; }
+        .cart-count { position: absolute; top: -8px; right: -8px; background: #d4af37; color: #1a1a1a; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; }
+        .hero { position: relative; height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center; color: white; }
+        .hero-content { background: rgba(26, 26, 26, 0.7); padding: 2rem; border-radius: 10px; }
+        .promo-tags { display: flex; gap: 1rem; justify-content: center; margin-top: 1rem; flex-wrap: wrap; }
+        .promo-tag { background: #d4af37; color: #1a1a1a; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; }
+        .slider { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; }
+        .slide { position: absolute; width: 100%; height: 100%; background-size: cover; background-position: center; opacity: 0; transition: opacity 1s; }
+        .slide.active { opacity: 1; }
+        section { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; }
+        h2 { text-align: center; margin-bottom: 3rem; color: #1a1a1a; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .card { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.3s; }
+        .card:hover { transform: translateY(-5px); }
+        .card img { width: 100%; height: 250px; object-fit: cover; }
+        .card-content { padding: 1.5rem; }
+        .card h3 { color: #1a1a1a; margin-bottom: 0.5rem; }
+        .card p { color: #666; margin-bottom: 1rem; }
+        .btn { background: #d4af37; color: #1a1a1a; padding: 0.8rem 1.5rem; border: none; border-radius: 5px; cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.3s; }
+        .btn:hover { background: #b8942f; }
+        .add-to-cart { background: #1a1a1a; color: #d4af37; margin-top: 1rem; }
+        .filters { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .filter-btn { padding: 0.5rem 1rem; background: #f8f8f8; border: 1px solid #ddd; cursor: pointer; }
+        .filter-btn.active { background: #d4af37; color: #1a1a1a; }
+        footer { background: #1a1a1a; color: #d4af37; text-align: center; padding: 2rem; }
+        @media (max-width: 768px) { header { flex-direction: column; gap: 1rem; } nav ul { flex-direction: column; } .grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#occasions">Occasions</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#collections">Collections</a></li>
+                <li><a href="#accessories">Accessories</a></li>
+            </ul>
+        </nav>
+        <div class="user-actions">
+            <a href="/signin">Sign In / Sign Up</a>
+            <a href="/orders">Track Orders</a>
+            <a href="/stores">Find Stores</a>
+            <div class="search-cart">
+                <input type="text" id="search" placeholder="Search...">
+                <div class="cart" onclick="toggleCart()">🛒 <span class="cart-count" id="cartCount">0</span></div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="slider">
+            <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1722952908609-4b57e23da1ee?fm=jpg&q=80&w=1920&ixlib=rb-4.1.0');"></div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1729347917808-e3e35a462fec?fm=jpg&q=80&w=1920&ixlib=rb-4.1.0');"></div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1634410251313-b65c51944ab3?fm=jpg&q=80&w=1920&ixlib=rb-4.1.0');"></div>
+        </div>
+        <div class="hero-content">
+            <h1>Welcome to Tasva</h1>
+            <p>Designer Men's Ethnic Wear</p>
+            <div class="promo-tags">
+                <span class="promo-tag">Free Alteration at Store</span>
+                <span class="promo-tag">Premium Quality</span>
+                <span class="promo-tag">Designer Wear Brand</span>
+                <span class="promo-tag">Secured Payment</span>
+            </div>
+            <a href="#categories" class="btn">Shop Now</a>
+        </div>
+    </section>
+
+    <section id="occasions">
+        <h2>Occasions</h2>
+        <div class="grid">
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1762709413447-15781dbc08f7?fm=jpg&q=80&w=800&ixlib=rb-4.1.0" alt="Destination Weddings">
+                <div class="card-content">
+                    <h3>Destination Weddings</h3>
+                    <p>Effortless luxury designed for scenic wedding escapes.</p>
+                    <a href="/c/destination-wedding-attire-for-men" class="btn">Explore</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1729347917808-e3e35a462fec?fm=jpg&q=80&w=800&ixlib=rb-4.1.0" alt="Cocktail & Dinner Parties">
+                <div class="card-content">
+                    <h3>Cocktail & Dinner Parties</h3>
+                    <p>Sophisticated silhouettes tailored for night-time celebrations.</p>
+                    <a href="/c/cocktail-dinner-party-outfits" class="btn">Explore</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1634410251313-b65c51944ab3?fm=jpg&q=80&w=800&ixlib=rb-4.1.0" alt="Family Rituals">
+                <div class="card-content">
+                    <h3>Family Rituals & Gatherings</h3>
+                    <p>Comfort-first styles with a graceful touch for intimate moments.</p>
+                    <a href="/c/mens-ethnicwear-family-gatherings-rituals" class="btn">Explore</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1755869012319-097675de6a8c?fm=jpg&q=80&w=800&ixlib=rb-4.1.0" alt="Year-End Parties">
+                <div class="card-content">
+                    <h3>Year-End Parties</h3>
+                    <p>Sharp, modern fits made for sparkling year-end moments.</p>
+                    <a href="/c/party-edit" class="btn">Explore</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="categories">
+        <h2>Product Categories</h2>
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterCategory('all')">All</button>
+            <button class="filter-btn" onclick="filterCategory('sherwani')">Sherwani</button>
+            <button class="filter-btn" onclick="filterCategory('kurta')">Kurta</button>
+            <button class="filter-btn" onclick="filterCategory('accessories')">Accessories</button>
+        </div>
+        <div class="grid" id="categoryGrid">
+            <div class="card" data-category="accessories">
+                <img src="https://images.unsplash.com/photo-1765700325742-b52f566bf6dd?fm=jpg&q=80&w=800&ixlib=rb-4.1.0" alt="Accessories">
+                <div class="card-content">
+                    <h3>Accessories</h3>
+                    <p>Finely crafted elements that enhance your occasion wear.</p>
+                    <button class="btn add-to-cart" onclick="addToCart('Accessories', 299)">Add to Cart - ₹299</button>
+                </div>
+            </div>
+            <div class="card" data-category="sherwani">
+                <img src="https://images.unsplash.com/photo-1627913755902-dddc0b4c8c63?fm=jpg&q=80&w=800&ixlib=rb-4.1.0" alt="Sherwani">
+                <div class="card-content">
+                    <h3>Sherwani</h3>
+                    <p>Timeless heritage reimagined through refined artisanal detail.</p>
+                    <button class="btn add-to-cart" onclick="addToCart('Sherwani', 4999)">Add to Cart - ₹4,999</button>
+                </div>
+            </div>
+            <div class="card" data-category="kurta">
+                <img src="https://images.unsplash.com/photo-1727835523545-70ee992b5763?fm=jpg&q=80&w=800&ixlib=rb-4.1.0" alt="Kurta Sets">
+                <div class="card-content">
+                    <h3>Kurta Sets</h3>
+                    <p>Elegant weaves tailored for comfort, culture, and contemporary living.</p>
+                    <button class="btn add-to-cart" onclick="addToCart('Kurta Sets', 2999)">Add to Cart - ₹2,999</button>
+                </div>
+            </div>
+            <div class="card" data-category="kurta">
+                <img src="https://images.unsplash.com/photo-1727835523550-18478cacefa2?fm=jpg&q=80&w=800&ixlib=rb-4.1.0" alt="Kurta Bundi Sets">
+                <div class="card-content">
+                    <h3>Kurta Bundi Sets</h3>
+                    <p>Refined craftsmanship and contemporary charm for every memorable moment.</p>
+                    <button class="btn add-to-cart" onclick="addToCart('Kurta Bundi', 3999)">Add to Cart - ₹3,999</button>
+                </div>
+            </div>
+            <div class="card" data-category="sherwani">
+                <img src="https://images.unsplash.com/photo-1722952934661-dde241aeb591?fm=jpg&q=80&w=800&ixlib=rb-4.1.0" alt="Bandhgalas">
+                <div class="card-content">
+                    <h3>Bandhgalas</h3>
+                    <p>Heritage-inspired tailoring designed for modern occasions.</p>
+                    <button class="btn add-to-cart" onclick="addToCart('Bandhgalas', 3499)">Add to Cart - ₹3,499</button>
+                </div>
+            </div>
+            <div class="card" data-category="accessories">
+                <img src="https://images.unsplash.com/photo-1765700325742-b52f566bf6dd?fm=jpg&q=80&w=800&ixlib=rb-4.1.0" alt="Dinner Jackets">
+                <div class="card-content">
+                    <h3>Dinner Jackets</h3>
+                    <p>Sharp, modern cuts perfect for distinguished after-dark style.</p>
+                    <button class="btn add-to-cart" onclick="addToCart('Dinner Jackets', 5999)">Add to Cart - ₹5,999</button>
+                </div>
+            </div>
+            <div class="card" data-category="kurta">
+                <img src="https://images.unsplash.com/photo-1727430201245-fb796167e302?fm=jpg&q=80&w=800&ixlib=rb-4.1.0" alt="Shirts">
+                <div class="card-content">
+                    <h3>Shirts</h3>
+                    <p>Styles crafted to refine your work attire and enhance your night-time charm.</p>
+                    <button class="btn add-to-cart" onclick="addToCart('Shirts', 1999)">Add to Cart - ₹1,999</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="collections">
+        <h2>Featured Collections</h2>
+        <div class="grid">
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1755869012319-097675de6a8c?fm=jpg&q=80&w=800&ixlib=rb-4.1.0" alt="Modern Minimal Edit">
+                <div class="card-content">
+                    <h3>Modern Minimal Edit</h3>
+                    <p>Minimal forms elevated with refined detailing.</p>
+                    <a href="/c/modern-minimal-edit" class="btn">Explore</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1727835523550-18478cacefa2?fm=jpg&q=80&w=800&ixlib=rb-4.1.0" alt="Signature Craftsmanship">
+                <div class="card-content">
+                    <h3>Signature Craftsmanship</h3>
+                    <p>Heritage techniques perfected for contemporary elegance.</p>
+                    <a href="/c/signature-craftsmanship" class="btn">Explore</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1765700325742-b52f566bf6dd?fm=jpg&q=80&w=800&ixlib=rb-4.1.0" alt="Warmth of Occasions">
+                <div class="card-content">
+                    <h3>The Warmth of Occasions Edit</h3>
+                    <p>Luxurious textures that elevate your cold-season style.</p>
+                    <a href="/c/the-warmth-of-occasions-edit" class="btn">Explore</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="accessories">
+        <h2>Accessory Highlights</h2>
+        <div class="grid">
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1727430201245-fb796167e302?fm=jpg&q=80&w=800&ixlib=rb-4.1.0" alt="Stoles & Dupattas">
+                <div class="card-content">
+                    <h3>Stoles & Dupattas</h3>
+                    <p>The perfect complement to your crafted celebration wear.</p>
+                    <a href="/c/stoles-and-shawls-for-men" class="btn">Explore</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1765700325742-b52f566bf6dd?fm=jpg&q=80&w=800&ixlib=rb-4.1.0" alt="Safas & Turbans">
+                <div class="card-content">
+                    <h3>Safas & Turbans</h3>
+                    <p>Timeless silhouettes designed for ceremonial grandeur.</p>
+                    <a href="/c/safa-for-groom" class="btn">Explore</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1634410251313-b65c51944ab3?fm=jpg&q=80&w=800&ixlib=rb-4.1.0" alt="Brooches & Malas">
+                <div class="card-content">
+                    <h3>Brooches & Malas</h3>
+                    <p>Statement adornments crafted for timeless sophistication.</p>
+                    <a href="/c/brooches-mala-necklaces-for-men" class="btn">Explore</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1727835523545-70ee992b5763?fm=jpg&q=80&w=800&ixlib=rb-4.1.0" alt="Juttis & Footwear">
+                <div class="card-content">
+                    <h3>Juttis & Footwear</h3>
+                    <p>Artisanal detailing that brings elegance to every step.</p>
+                    <a href="/c/ethnic-footwear-for-men" class="btn">Explore</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>TASVA On You: Share your latest looks for a chance to be featured</p>
+        <p>Tasva Exclusives</p>
+    </footer>
+
+    <script>
+        // Hero Slider
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+        setInterval(() => {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }, 3000);
+
+        // Smooth Scroll for Nav Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Search Functionality (Basic)
+        document.getElementById('search').addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase();
+            document.querySelectorAll('.card').forEach(card => {
+                const text = card.textContent.toLowerCase();
+                card.style.display = text.includes(query) ? 'block' : 'none';
+            });
+        });
+
+        // Cart Functionality
+        let cartCount = 0;
+        function addToCart(item, price) {
+            cartCount++;
+            document.getElementById('cartCount').textContent = cartCount;
+            alert(`${item} (₹${price}) added to cart!`);
+        }
+        function toggleCart() {
+            alert(`Cart has ${cartCount} items. (Implement modal here)`);
+        }
+
+        // Category Filters
+        function filterCategory(cat) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            document.querySelectorAll('#categoryGrid .card').forEach(card => {
+                card.style.display = (cat === 'all' || card.dataset.category === cat) ? 'block' : 'none';
+            });
+        }
+    </script>
+</body>
+</html>

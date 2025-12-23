@@ -1,0 +1,23 @@
+Build a full-stack MERN website for "Spaceway", a modern, intelligent platform that empowers SMEs (e.g., e-commerce sellers, distributors, retailers, product managers, pricing analysts, and business owners) to manage product listings, automate pricing strategies, track competitors, analyze turnover, and boost profitability through data-driven insights. The site should feel professional, innovative, and user-centric—like a blend of Stripe's clean minimalism and Notion's interactive flair—with seamless animations, 3D elements, and microinteractions to drive engagement. Prioritize conversion with prominent CTAs like "Request Demo", "Get Started", "Sign Up Free", and "Login" appearing strategically on every page (e.g., hero sections, footers, modals).
+
+
+
+
+
+Tech Stack
+Frontend: React.js (v18+) with Tailwind CSS for styling. Use Vite for fast bundling. Integrate advanced libraries for animations and interactivity:
+Framer Motion for smooth transitions, microinteractions (e.g., hover lifts, scroll-triggered reveals), and loading states.
+Three.js or React Three Fiber for subtle 3D visuals (e.g., rotating product orbs on the home page or interactive turnover graphs).
+Lottie for animated icons/graphics (e.g., pricing waves, loading spinners).
+React Spring or GSAP for advanced effects like parallax scrolling and glassmorphism (frosted glass cards with backdrop blur).
+React Icons (from react-icons library) for perfect, scalable icons (e.g., Heroicons or Lucide for modern line icons).
+React Hook Form + Zod for forms; React Query (TanStack Query) for data fetching/caching.
+Theme support: Use Tailwind's dark mode classes with a context provider for light/dark toggle.
+Backend: Node.js (v20+) with Express.js. Structure as RESTful API with:
+Separate routes for each section (e.g., /api/products, /api/turnover, /api/auth).
+Controllers per feature (e.g., productController.js, turnoverController.js).
+Providers/services for business logic (e.g., repricingProvider.js handling MRP comparisons).
+Middleware for auth (JWT verification), error handling, and rate limiting (using express-rate-limit).
+Database: MongoDB with Mongoose ODM. Design scalable schemas (below) for 10,000+ SKUs and 1,500+ concurrent users. Use indexing on frequent queries (e.g., product IDs, timestamps).
+Authentication: JWT tokens (jsonwebtoken library) with 7-day expiration. Implement secure login/register with bcrypt for password hashing, refresh tokens, and role-based access (e.g., user/admin). Use HTTP-only cookies for storage.
+Deployment/Infra: Ensure scalability with clustering (Node cluster module), caching (Redis via ioredis if needed), and environment vars (.env). Code must be modular, with full inline comments explaining logic, components, and future extensibility.
